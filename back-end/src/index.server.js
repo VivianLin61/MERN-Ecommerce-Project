@@ -5,7 +5,8 @@ const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 
 //routres
-const userRoutes = require('./routes/user')
+const authRoutes = require('./routes/auth')
+const adminRoutes = require('./routes/admin/auth')
 //environment variables
 env.config()
 
@@ -24,7 +25,9 @@ mongoose
   })
 
 app.use(express.json())
-app.use('/api', userRoutes)
+app.use('/api', authRoutes)
+
+app.use('/api', adminRoutes)
 
 app.post('/data', (req, res, next) => {
   res.status(200).json({
