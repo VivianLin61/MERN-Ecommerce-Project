@@ -2,7 +2,7 @@ const express = require('express')
 const env = require('dotenv')
 const app = express()
 const mongoose = require('mongoose')
-
+const path = require('path')
 //routres
 const authRoutes = require('./routes/auth')
 const adminRoutes = require('./routes/admin/auth')
@@ -27,6 +27,7 @@ mongoose
   })
 
 app.use(express.json())
+app.use('/public', express.static(path.join(__dirname, 'uploads')))
 app.use('/api', authRoutes)
 app.use('/api', adminRoutes)
 app.use('/api', categoryRoutes)

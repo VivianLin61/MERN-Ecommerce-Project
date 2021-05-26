@@ -1,15 +1,25 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import Layout from '../../components/Layout'
 import { Container, Form, Row, Col, Button } from 'react-bootstrap'
 import Input from '../../components/UI/Input'
 import { Redirect } from 'react-router-dom'
-
+import { login } from '../../actions'
+import { useDispatch } from 'react-redux'
 const Signin = (props) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
+  const dispatch = useDispatch()
+
   const userLogin = (e) => {
     e.preventDefault()
+
+    const user = {
+      email: 'test@gmail.com',
+      password: '123456',
+    }
+
+    dispatch(login(user))
   }
 
   return (
