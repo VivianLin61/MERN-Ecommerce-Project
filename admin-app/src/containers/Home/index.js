@@ -1,19 +1,28 @@
 import React from 'react'
-import Layout from '../../components/Layout/index.js'
-import { Jumbotron } from 'react-bootstrap'
+import Layout from '../../components/Layout'
+import { Jumbotron, Row, Col, Container } from 'react-bootstrap'
+import './style.css'
+import { NavLink } from 'react-router-dom'
+import './style.css'
+/**
+ * @author
+ * @function Home
+ **/
+
 const Home = (props) => {
   return (
-    <>
-      <Layout>
-        <Jumbotron
-          style={{ margin: '5rem', background: '#fff' }}
-          className='text-center'
-        >
-          <h1>Welcome to Admin Dashboard</h1>
-          <p>dkfkdhskgjhdskjfghjks</p>
-        </Jumbotron>
-      </Layout>
-    </>
+    <Layout>
+      <Container>
+        <Row>
+          <Col md={2} className='sidebar'>
+            <div style={{ top: '10%' }}>Sidebar</div>
+          </Col>
+          <Col md={10} className='main'>
+            <div>Container</div>
+          </Col>
+        </Row>
+      </Container>
+    </Layout>
   )
 }
 

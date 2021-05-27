@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import Layout from '../../components/Layout'
 import { Container, Form, Row, Col, Button } from 'react-bootstrap'
-import Input from '../../components/UI/Input'
-import { login, isUserLoggedIn } from '../../actions'
+
+import { login } from '../../actions'
 import { useDispatch, useSelector } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import { FormControl } from 'react-bootstrap'
@@ -16,11 +16,7 @@ const Signin = (props) => {
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
   const auth = useSelector((state) => state.auth)
-  useEffect(() => {
-    if (!auth.authenticate) {
-      dispatch(isUserLoggedIn())
-    }
-  })
+
   const dispatch = useDispatch()
 
   const userLogin = (e) => {

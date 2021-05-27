@@ -1,3 +1,5 @@
+/* eslint-disable default-case */
+/* eslint-disable import/no-anonymous-default-export */
 import { authConstants } from '../actions/constants'
 const initState = {
   token: null,
@@ -28,6 +30,10 @@ export default (state = initState, action) => {
         authenticate: true,
         authenticating: false,
       }
+      break
+    case authConstants.LOGOUT_REQUEST:
+      state = { ...initState }
+      break
   }
   return state
 }
