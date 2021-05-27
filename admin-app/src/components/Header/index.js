@@ -3,6 +3,7 @@ import { Navbar, Nav, NavDropdown, Container } from 'react-bootstrap'
 import { NavLink, Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { signout } from '../../actions'
+import { Redirect } from 'react-router-dom'
 
 const Header = (props) => {
   const auth = useSelector((state) => state.auth)
@@ -10,6 +11,7 @@ const Header = (props) => {
   const logout = () => {
     dispatch(signout())
   }
+
   const renderLoggedInLinks = () => {
     return (
       <Nav>
