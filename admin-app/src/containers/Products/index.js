@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import Layout from '../../components/Layout'
 import { Redirect } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { Row, Col, Container, Button } from 'react-bootstrap'
+import { Container, Row, Col, Table } from 'react-bootstrap'
 // import { getAllProducts, addProducts } from '../../actions'
 import Input from '../../components/UI/Input'
 import Modal from '../../components/UI/Modal'
@@ -59,6 +59,37 @@ const Products = (props) => {
 
     return options
   }
+
+  const renderProducts = () => {
+    return (
+      <Table style={{ fontSize: 12 }} responsive='sm'>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Category</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {' '}
+          {product.products.length > 0
+            ? product.products.map((product, index) => (
+                <tr key={product._id}>
+                  <td>{index + 1}</td>
+                  <td>{product.name}</td>
+                  <td>{product.price}</td>
+                  <td>{product.quantity}</td>
+                  <td>{product.category.name}</td>
+                </tr>
+              ))
+            : null}
+        </tbody>
+      </Table>
+    )
+  }
   return (
     <>
       <Layout sidebar>
@@ -76,9 +107,7 @@ const Products = (props) => {
             </Col>
           </Row>
           <Row>
-            <Col>
-              <ul>{}</ul>
-            </Col>
+            <Col>{renderProducts()}</Col>
           </Row>
         </Container>
 
