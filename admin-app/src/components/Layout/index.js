@@ -15,13 +15,18 @@ const Layout = (props) => {
             <Col md={2} className='sidebar'>
               <ul>
                 <li>
-                  <NavLink to={'/'}>Home</NavLink>
+                  <NavLink to={'/'} exact>
+                    Home
+                  </NavLink>
                 </li>
                 <li>
                   <NavLink to={'/products'}>Products</NavLink>
                 </li>
                 <li>
                   <NavLink to={'/orders'}>Orders</NavLink>
+                </li>
+                <li>
+                  <NavLink to={'/category'}>Categories</NavLink>
                 </li>
               </ul>
             </Col>

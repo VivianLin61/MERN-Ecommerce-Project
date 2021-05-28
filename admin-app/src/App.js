@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { isUserLoggedIn } from '../src/actions'
 import Products from '../src/containers/Products'
 import Orders from '../src/containers/Orders'
+import Category from '../src/containers/Category'
 import { Redirect } from 'react-router-dom'
 function App() {
   const dispatch = useDispatch()
@@ -21,13 +22,10 @@ function App() {
   return (
     <div className='App'>
       <Switch>
-        <PrivateRoute exact path='/' component={Home}></PrivateRoute>
-        <PrivateRoute
-          exact
-          path='/products'
-          component={Products}
-        ></PrivateRoute>
-        <PrivateRoute exact path='/orders' component={Orders}></PrivateRoute>
+        <PrivateRoute path='/' exact component={Home}></PrivateRoute>
+        <PrivateRoute path='/products' component={Products}></PrivateRoute>
+        <PrivateRoute path='/orders' component={Orders}></PrivateRoute>
+        <PrivateRoute path='/category' component={Category}></PrivateRoute>
         <Route exact path='/signin' component={Signin}></Route>
         <Route exact path='/signup' component={Signup}></Route>
       </Switch>
