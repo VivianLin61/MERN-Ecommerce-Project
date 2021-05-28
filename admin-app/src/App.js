@@ -11,6 +11,7 @@ import Products from '../src/containers/Products'
 import Orders from '../src/containers/Orders'
 import Category from '../src/containers/Category'
 import { Redirect } from 'react-router-dom'
+import { getAllCategory } from '../src/actions'
 function App() {
   const dispatch = useDispatch()
   const auth = useSelector((state) => state.auth)
@@ -18,6 +19,7 @@ function App() {
     if (!auth.authenticate) {
       dispatch(isUserLoggedIn())
     }
+    dispatch(getAllCategory())
   }, [])
   return (
     <div className='App'>
