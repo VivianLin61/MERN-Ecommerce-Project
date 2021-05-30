@@ -36,6 +36,7 @@ const Category = (props) => {
   const [checkedArray, setCheckedArray] = useState([])
   const [expandedArray, setExpandedArray] = useState([])
   const [updateCategoryModal, setUpdateCategoryModal] = useState(false)
+  const [deleteCategoryModal, setDeleteCategoryModal] = useState(false)
   const handleClose = () => {
     const form = new FormData()
     form.append('name', categoryName)
@@ -88,6 +89,10 @@ const Category = (props) => {
 
   const updateCategory = () => {
     setUpdateCategoryModal(true)
+    updateCheckedAndExpandedCategories()
+  }
+
+  const updateCheckedAndExpandedCategories = () => {
     const categories = createCategoryList(category.categories)
     const checkedArray = []
     const expandedArray = []
@@ -146,6 +151,65 @@ const Category = (props) => {
     })
     setUpdateCategoryModal(false)
   }
+
+  const deleteCategory = () => {
+    updateCheckedAndExpandedCategories()
+    setDeleteCategoryModal(true)
+  }
+
+  const deleteCategories = () => {
+    const checkedIdsArray = checkedArray.map((item, index) => ({
+      _id: item.value,
+    }))
+    const expandedIdsArray = expandedArray.map((item, index) => ({
+      _id: item.value,
+    }))
+    const idsArray = expandedIdsArray.concat(checkedIdsArray)
+
+    if (checkedIdsArray.length > 0) {
+      dispatch(deleteCategoriesAction(checkedIdsArray)).then((result) => {
+        if (result) {
+          dispatch(getAllCategory())
+          setDeleteCategoryModal(false)
+        }
+      })
+    }
+
+    setDeleteCategoryModal(false)
+  }
+  const renderDeleteCategoryModal = () => {
+    return (
+      <Modal
+        modalTitle='Confirm'
+        show={deleteCategoryModal}
+        handleClose={() => setDeleteCategoryModal(false)}
+        buttons={[
+          {
+            label: 'No',
+            color: 'primary',
+            onClick: () => {
+              alert('no')
+            },
+          },
+          {
+            label: 'Yes',
+            color: 'danger',
+            onClick: deleteCategories,
+          },
+        ]}
+      >
+        <h5>Expanded</h5>
+        {expandedArray.map((item, index) => (
+          <span key={index}>{item.name}</span>
+        ))}
+        <h5>Checked</h5>
+        {checkedArray.map((item, index) => (
+          <span key={index}>{item.name}</span>
+        ))}
+      </Modal>
+    )
+  }
+
   const categoryList = createCategoryList(category.categories)
   return (
     <>
@@ -164,7 +228,7 @@ const Category = (props) => {
                     <button onClick={handleShow}>
                       <IoIosAdd /> <span>Add</span>
                     </button>
-                    <button onClick={() => {}}>
+                    <button onClick={deleteCategory}>
                       <IoIosTrash /> <span>Delete</span>
                     </button>
                     <button onClick={updateCategory}>
@@ -361,6 +425,7 @@ const Category = (props) => {
               </Row>
             ))}
         </Modal>
+        {renderDeleteCategoryModal()}
       </Layout>
     </>
   )

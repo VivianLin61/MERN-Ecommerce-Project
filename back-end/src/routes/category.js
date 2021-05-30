@@ -5,6 +5,7 @@ const {
   addCategory,
   getCategories,
   updateCategories,
+  deleteCategories,
 } = require('../controller/category')
 const path = require('path')
 const shortid = require('shortid')
@@ -35,4 +36,12 @@ router.post(
   upload.array('categoryImage'),
   updateCategories
 )
+
+router.post(
+  '/category/delete',
+  requireSignin,
+  adminMiddleware,
+  deleteCategories
+)
+
 module.exports = router
