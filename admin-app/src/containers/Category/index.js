@@ -4,7 +4,12 @@ import Layout from '../../components/Layout'
 import { Redirect } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { Row, Col, Container, Button } from 'react-bootstrap'
-import { getAllCategory, addCategory } from '../../actions'
+import {
+  getAllCategory,
+  addCategory,
+  updateCategories,
+  deleteCategories as deleteCategoriesAction,
+} from '../../actions'
 import Input from '../../components/UI/Input'
 import Modal from '../../components/UI/Modal'
 
@@ -119,6 +124,28 @@ const Category = (props) => {
     }
   }
 
+  const updateCategoriesForm = () => {
+    const form = new FormData()
+
+    expandedArray.forEach((item, index) => {
+      form.append('_id', item.value)
+      form.append('name', item.name)
+      form.append('parentId', item.parentId ? item.parentId : '')
+      form.append('type', item.type)
+    })
+    checkedArray.forEach((item, index) => {
+      form.append('_id', item.value)
+      form.append('name', item.name)
+      form.append('parentId', item.parentId ? item.parentId : '')
+      form.append('type', item.type)
+    })
+    dispatch(updateCategories(form)).then((result) => {
+      if (result) {
+        dispatch(getAllCategory())
+      }
+    })
+    setUpdateCategoryModal(false)
+  }
   const categoryList = createCategoryList(category.categories)
   return (
     <>
@@ -205,7 +232,7 @@ const Category = (props) => {
         <Modal
           show={updateCategoryModal}
           handleClose={() => setUpdateCategoryModal(false)}
-          onSubmit={handleClose}
+          onSubmit={updateCategoriesForm}
           modalTitle={'Add Cateogory'}
           size={'lg'}
         >
