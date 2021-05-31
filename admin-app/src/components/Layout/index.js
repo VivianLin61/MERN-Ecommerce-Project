@@ -20,6 +20,9 @@ const Layout = (props) => {
                   </NavLink>
                 </li>
                 <li>
+                  <NavLink to={'/page'}>Pages</NavLink>
+                </li>
+                <li>
                   <NavLink to={'/products'}>Products</NavLink>
                 </li>
                 <li>
