@@ -7,6 +7,7 @@ import linearCategories from '../../helpers/linearCategories'
 import { useSelector, useDispatch } from 'react-redux'
 import { createPage } from '../../actions'
 
+
 /**
  * @author
  * @function NewPage
@@ -132,7 +133,7 @@ const NewPage = (props) => {
               <Input
                 value={desc}
                 onChange={(e) => setDesc(e.target.value)}
-                placeholder={'Page Desc'}
+                placeholder={'Page Description'}
                 className=''
               />
             </Col>
