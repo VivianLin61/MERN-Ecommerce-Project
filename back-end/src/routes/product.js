@@ -2,7 +2,11 @@ const express = require('express')
 const router = express.Router()
 const multer = require('multer')
 const { requireSignin, adminMiddleware } = require('../common-middleware/index')
-const { createProduct, getProductsBySlug } = require('../controller/product')
+const {
+  createProduct,
+  getProductsBySlug,
+  getProductDetailsById,
+} = require('../controller/product')
 const path = require('path')
 const shortid = require('shortid')
 
@@ -23,4 +27,5 @@ router.post(
   createProduct
 )
 router.get('/products/:slug', getProductsBySlug)
+router.get('/product/:productId', getProductDetailsById)
 module.exports = router

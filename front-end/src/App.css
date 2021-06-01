@@ -1,3 +1,11 @@
 body {
   margin: 0px;
+  background: #f1f3f6;
+}
+
+* {
+  font-family: 'Roboto', sans-serif;
+}
+.flexRow {
+  display: flex;
 }
