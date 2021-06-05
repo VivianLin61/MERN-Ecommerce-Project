@@ -7,6 +7,7 @@ import ProductDetailsPage from './containers/ProductDetailsPage'
 import CartPage from './containers/CartPage'
 import { useDispatch, useSelector } from 'react-redux'
 import { isUserLoggedIn, updateCart } from './actions'
+import CheckoutPage from "./containers/CheckoutPage";
 function App() {
   const dispatch = useDispatch()
   const auth = useSelector((state) => state.auth)
@@ -27,6 +28,7 @@ function App() {
         <Switch>
           <Route path='/' exact component={HomePage}></Route>
           <Route path='/cart' component={CartPage} />
+          <Route path='/checkout' component={CheckoutPage} />
           <Route
             path='/:productSlug/:productId/p'
             component={ProductDetailsPage}
