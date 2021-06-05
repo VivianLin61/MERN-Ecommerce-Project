@@ -12,6 +12,7 @@ const cartRoutes = require('./routes/cart')
 const initialDataRoutes = require('./routes/admin/initialData')
 const pageRoutes = require('./routes/admin/page')
 const addressRoutes = require('./routes/address')
+const orderRoutes = require('./routes/order')
 const cors = require('cors')
 //environment variables
 env.config()
@@ -39,6 +40,7 @@ app.use('/api', productRoutes)
 app.use('/api', cartRoutes)
 app.use('/api', initialDataRoutes)
 app.use('/api', pageRoutes)
+app.use('/api', orderRoutes)
 app.use('/api', addressRoutes)
 app.post('/data', (req, res, next) => {
   res.status(200).json({

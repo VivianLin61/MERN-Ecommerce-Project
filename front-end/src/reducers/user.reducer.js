@@ -4,6 +4,7 @@ import { userConstants } from '../actions/constants'
 
 const initState = {
   address: [],
+  placedOrderId: null,
   error: null,
   loading: false,
 }
@@ -48,6 +49,13 @@ export default (state = initState, action) => {
         ...state,
         loading: false,
         error: action.payload.error,
+      }
+      break
+
+    case userConstants.ADD_USER_ORDER_SUCCESS:
+      state = {
+        ...state,
+        placedOrderId: action.payload.order._id,
       }
       break
   }

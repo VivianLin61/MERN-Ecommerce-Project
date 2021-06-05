@@ -6,7 +6,7 @@ import { MaterialButton } from '../../components/MaterialUI'
 import CartItem from './CartItem'
 import { addToCart, getCartItems, removeCartItem } from '../../actions'
 import './style.css'
-
+import PriceDetails from '../../components/PriceDetails'
 const CartPage = (props) => {
   const cart = useSelector((state) => state.cart)
   const auth = useSelector((state) => state.auth)
@@ -35,6 +35,22 @@ const CartPage = (props) => {
 
   const onRemoveCartItem = (_id) => {
     dispatch(removeCartItem({ productId: _id }))
+  }
+
+  if (props.onlyCartItems) {
+    return (
+      <>
+        {Object.keys(cartItems).map((key, index) => (
+          <CartItem
+            key={index}
+            cartItem={cartItems[key]}
+            onQuantityInc={onQuantityIncrement}
+            onQuantityDec={onQuantityDecrement}
+            onRemoveCartItem={onRemoveCartItem}
+          />
+        ))}
+      </>
+    )
   }
 
   return (
@@ -71,9 +87,24 @@ const CartPage = (props) => {
               </div>
             </div>
           </Card>
-          <Card headerLeft={`Checkout`} style={{ width: '500px' }}>
-            Price
-          </Card>
+
+          <PriceDetails
+            totalItem={
+              cart.cartItems
+                ? Object.keys(cart.cartItems).reduce(function (qty, key) {
+                    return qty + cart.cartItems[key].qty
+                  }, 0)
+                : 0
+            }
+            totalPrice={
+              cart.cartItems
+                ? Object.keys(cart.cartItems).reduce((totalPrice, key) => {
+                    const { price, qty } = cart.cartItems[key]
+                    return totalPrice + price * qty
+                  }, 0)
+                : 0
+            }
+          />
         </div>
 
         <>
