@@ -10,6 +10,7 @@ import { isUserLoggedIn, updateCart } from './actions'
 import CheckoutPage from './containers/CheckoutPage'
 import { Router } from 'react-router'
 import createHistory from 'history/createBrowserHistory'
+import OrderPage from './containers/OrderPage'
 
 const history = createHistory({ forceRefresh: true })
 function App() {
@@ -34,6 +35,7 @@ function App() {
             <Route path='/' exact component={HomePage}></Route>
             <Route path='/cart' component={CartPage} />
             <Route path='/checkout' component={CheckoutPage} />
+            <Route path='/account/orders' component={OrderPage} />
             <Route
               path='/:productSlug/:productId/p'
               component={ProductDetailsPage}
