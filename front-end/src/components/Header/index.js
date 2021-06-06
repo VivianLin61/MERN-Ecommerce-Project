@@ -9,7 +9,7 @@ import {
 } from '../MaterialUI'
 import { useDispatch, useSelector } from 'react-redux'
 import { login, signout, signup as _signup } from '../../actions'
-// import Cart from '../UI/Cart'
+import Cart from '../UI/Cart'
 
 /**
  * @author
@@ -261,7 +261,9 @@ const Header = (props) => {
           />
           <div>
             <a href={`/cart`} className='cart'>
-              {/* <Cart count={Object.keys(cart.cartItems).length} /> */}
+              <Cart
+                count={cart.cartItems ? Object.keys(cart.cartItems).length : 0}
+              />
               <span style={{ margin: '0 10px' }}>Cart</span>
             </a>
           </div>

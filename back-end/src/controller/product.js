@@ -4,14 +4,14 @@ const slugify = require('slugify')
 const Category = require('../models/category')
 
 exports.createProduct = (req, res) => {
-  //   res.status(200).json({ file: req.files, body: req.body })
+  //res.status(200).json( { file: req.files, body: req.body } );
 
   const { name, price, description, category, quantity, createdBy } = req.body
   let productPictures = []
 
   if (req.files.length > 0) {
     productPictures = req.files.map((file) => {
-      return { img: file.filename }
+      return { img: file.location }
     })
   }
 
@@ -29,7 +29,7 @@ exports.createProduct = (req, res) => {
   product.save((error, product) => {
     if (error) return res.status(400).json({ error })
     if (product) {
-      res.status(201).json({ product })
+      res.status(201).json({ product, files: req.files })
     }
   })
 }
@@ -37,7 +37,7 @@ exports.createProduct = (req, res) => {
 exports.getProductsBySlug = (req, res) => {
   const { slug } = req.params
   Category.findOne({ slug: slug })
-    .select('_id')
+    .select('_id type')
     .exec((error, category) => {
       if (error) {
         return res.status(400).json({ error })
@@ -49,34 +49,36 @@ exports.getProductsBySlug = (req, res) => {
             return res.status(400).json({ error })
           }
 
-          if (products.length > 0) {
-            res.status(200).json({
-              products,
-              priceRange: {
-                under50: 50,
-                under100: 100,
-                under150: 150,
-                under250: 250,
-                under400: 400,
-                over400: 401,
-              },
-              productsByPrice: {
-                under50: products.filter((product) => product.price <= 50),
-                under100: products.filter(
-                  (product) => product.price > 50 && product.price <= 100
-                ),
-                under150: products.filter(
-                  (product) => product.price > 100 && product.price <= 150
-                ),
-                under250: products.filter(
-                  (product) => product.price > 150 && product.price <= 250
-                ),
-                under400: products.filter(
-                  (product) => product.price > 250 && product.price <= 400
-                ),
-                over400: products.filter((product) => product.price > 400),
-              },
-            })
+          if (category.type) {
+            if (products.length > 0) {
+              res.status(200).json({
+                products,
+                priceRange: {
+                  under5k: 5000,
+                  under10k: 10000,
+                  under15k: 15000,
+                  under20k: 20000,
+                  under30k: 30000,
+                },
+                productsByPrice: {
+                  under5k: products.filter((product) => product.price <= 5000),
+                  under10k: products.filter(
+                    (product) => product.price > 5000 && product.price <= 10000
+                  ),
+                  under15k: products.filter(
+                    (product) => product.price > 10000 && product.price <= 15000
+                  ),
+                  under20k: products.filter(
+                    (product) => product.price > 15000 && product.price <= 20000
+                  ),
+                  under30k: products.filter(
+                    (product) => product.price > 20000 && product.price <= 30000
+                  ),
+                },
+              })
+            }
+          } else {
+            res.status(200).json({ products })
           }
         })
       }

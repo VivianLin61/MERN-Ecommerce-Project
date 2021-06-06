@@ -11,6 +11,7 @@ import CheckoutPage from './containers/CheckoutPage'
 import { Router } from 'react-router'
 import createHistory from 'history/createBrowserHistory'
 import OrderPage from './containers/OrderPage'
+import OrderDetailsPage from './containers/OrderDetailsPage'
 
 const history = createHistory({ forceRefresh: true })
 function App() {
@@ -36,6 +37,10 @@ function App() {
             <Route path='/cart' component={CartPage} />
             <Route path='/checkout' component={CheckoutPage} />
             <Route path='/account/orders' component={OrderPage} />
+            <Route
+              path='/order_details/:orderId'
+              component={OrderDetailsPage}
+            />
             <Route
               path='/:productSlug/:productId/p'
               component={ProductDetailsPage}

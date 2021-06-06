@@ -7,7 +7,7 @@ import { Container, Row, Col, Table } from 'react-bootstrap'
 // import { getAllProducts, addProducts } from '../../actions'
 import Input from '../../components/UI/Input'
 import Modal from '../../components/UI/Modal'
-import { addProduct } from '../../actions'
+import { addProduct, deleteProductById } from '../../actions'
 import './style.css'
 import { generatePublicUrl } from '../../urlConfig.js'
 const Products = (props) => {
@@ -148,6 +148,16 @@ const Products = (props) => {
                   <td>
                     <button onClick={() => showProductDetailsModal(product)}>
                       info
+                    </button>
+                    <button
+                      onClick={() => {
+                        const payload = {
+                          productId: product._id,
+                        }
+                        dispatch(deleteProductById(payload))
+                      }}
+                    >
+                      del
                     </button>
                   </td>
                 </tr>
