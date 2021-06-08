@@ -34,6 +34,9 @@
 }
 .logo .logoimage {
   width: 75px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 20px;
 }
 .exploreText {
   font-size: 10px;

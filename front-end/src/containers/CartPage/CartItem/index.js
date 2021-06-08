@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import './style.css'
 import { generatePublicUrl } from '../../../urlConfig'
-
+import { BiDollar } from 'react-icons/bi'
 /**
  * @author
  * @function CartItem
@@ -32,9 +32,11 @@ const CartItem = (props) => {
         <div className='cartItemDetails'>
           <div>
             <p>{name}</p>
-            <p>Rs. {price}</p>
+            <p>
+              <BiDollar /> {price}
+            </p>
           </div>
-          <div>Delivery in 3 - 5 days</div>
+          {/* <div style={{ margin: '20px' }}>Delivery in 3 - 5 days</div> */}
         </div>
       </div>
       <div
@@ -49,7 +51,7 @@ const CartItem = (props) => {
           <input value={qty} readOnly />
           <button onClick={onQuantityIncrement}>+</button>
         </div>
-        <button className='cartActionBtn'>save for later</button>
+        {/* <button className='cartActionBtn'>save for later</button> */}
         <button
           className='cartActionBtn'
           onClick={() => props.onRemoveCartItem(_id)}

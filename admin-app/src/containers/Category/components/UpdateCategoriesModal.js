@@ -14,9 +14,10 @@ const UpdateCategoriesModal = (props) => {
     handleCategoryInput,
     categoryList,
     onSubmit,
+    handleCategoryImage,
   } = props
 
-  console.log({ expandedArray, checkedArray })
+  console.log({ checkedArray })
 
   return (
     <Modal
@@ -78,6 +79,20 @@ const UpdateCategoriesModal = (props) => {
                 <option value='page'>Page</option>
               </select>
             </Col>
+            <Col>
+              <input
+                type='file'
+                name='categoryImage'
+                onChange={(e) =>
+                  handleCategoryInput(
+                    'categoryImage',
+                    e.target.files[0],
+                    index,
+                    'expanded'
+                  )
+                }
+              />
+            </Col>
           </Row>
         ))}
       <h6>Checked Categories</h6>
@@ -114,6 +129,7 @@ const UpdateCategoriesModal = (props) => {
                 ))}
               </select>
             </Col>
+
             <Col>
               <select
                 className='form-control'
@@ -127,6 +143,21 @@ const UpdateCategoriesModal = (props) => {
                 <option value='product'>Product</option>
                 <option value='page'>Page</option>
               </select>
+            </Col>
+
+            <Col>
+              <input
+                type='file'
+                name='categoryImage'
+                onChange={(e) =>
+                  handleCategoryInput(
+                    'categoryImage',
+                    e.target.files[0],
+                    index,
+                    'checked'
+                  )
+                }
+              />
             </Col>
           </Row>
         ))}

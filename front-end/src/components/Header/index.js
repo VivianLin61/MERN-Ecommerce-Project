@@ -73,20 +73,11 @@ const Header = (props) => {
           <a className='fullName'>{auth.user ? auth.user.firstName : <> </>}</a>
         }
         menus={[
-          { label: 'My Profile', href: '', icon: null },
-          { label: 'SuperCoin Zone', href: '', icon: null },
-          { label: 'Flipkart Plus Zone', href: '', icon: null },
           {
             label: 'Orders',
             href: `/account/orders`,
             icon: null,
           },
-          { label: 'Wishlist', href: '', icon: null },
-          { label: 'My Chats', href: '', icon: null },
-          { label: 'Coupons', href: '', icon: null },
-          { label: 'Rewards', href: '', icon: null },
-          { label: 'Notifications', href: '', icon: null },
-          { label: 'Gift Cards', href: '', icon: null },
           { label: 'Logout', href: '', icon: null, onClick: logout },
         ]}
       />
@@ -108,8 +99,6 @@ const Header = (props) => {
           </a>
         }
         menus={[
-          { label: 'My Profile', href: '', icon: null },
-          { label: 'Flipkart Plus Zone', href: '', icon: null },
           {
             label: 'Orders',
             href: `/account/orders`,
@@ -118,9 +107,6 @@ const Header = (props) => {
               !auth.authenticate && setLoginModal(true)
             },
           },
-          { label: 'Wishlist', href: '', icon: null },
-          { label: 'Rewards', href: '', icon: null },
-          { label: 'Gift Cards', href: '', icon: null },
         ]}
         firstMenu={
           <div className='firstmenu'>
@@ -146,8 +132,18 @@ const Header = (props) => {
         <div className='authContainer'>
           <div className='row'>
             <div className='leftspace'>
-              <h2>Login</h2>
-              <p>Get access to your Orders, Wishlist and Recommendations</p>
+              {signup ? (
+                <>
+                  {' '}
+                  <h2>Sign Up</h2>
+                  <p>Get access to your Orders, Wishlist and Recommendations</p>
+                </>
+              ) : (
+                <>
+                  <h2>Login</h2>
+                  <p>Get access to your Orders, Wishlist and Recommendations</p>
+                </>
+              )}
             </div>
             <div className='rightspace'>
               <div className='loginInputContainer'>
@@ -193,15 +189,6 @@ const Header = (props) => {
                   }}
                   onClick={userLogin}
                 />
-                <p style={{ textAlign: 'center' }}>OR</p>
-                <MaterialButton
-                  title='Request OTP'
-                  bgColor='#ffffff'
-                  textColor='#2874f0'
-                  style={{
-                    margin: '20px 0',
-                  }}
-                />
               </div>
             </div>
           </div>
@@ -210,11 +197,8 @@ const Header = (props) => {
       <div className='subHeader'>
         {/* Logo  */}
         <div className='logo'>
-          <a className='logoimage' style={{ color: 'white' }}>
-            STORE
-            {/* <span className='exploreText'>Explore</span>
-            <span className='plusText'>Plus</span> */}
-            {/* <img src={} className='goldenStar' alt='' /> */}
+          <a href='/' className='logoimage' style={{ color: 'white' }}>
+            SHOP
           </a>
         </div>
         {/* logo ends here */}
@@ -225,6 +209,7 @@ const Header = (props) => {
             padding: '0 10px',
           }}
         >
+          
           <div className='searchInputContainer'>
             <input
               className='searchInput'
@@ -244,21 +229,7 @@ const Header = (props) => {
         {/* right side menu */}
         <div className='rightMenu'>
           {auth.authenticate ? renderLoggedInMenu() : renderNonLoggedInMenu()}
-          <DropdownMenu
-            menu={
-              <a className='more'>
-                <span>More</span>
-                <IoIosArrowDown />
-              </a>
-            }
-            menus={[
-              { label: 'Notification Preference', href: '', icon: null },
-              { label: 'Sell on flipkart', href: '', icon: null },
-              { label: '24x7 Customer Care', href: '', icon: null },
-              { label: 'Advertise', href: '', icon: null },
-              { label: 'Download App', href: '', icon: null },
-            ]}
-          />
+
           <div>
             <a href={`/cart`} className='cart'>
               <Cart

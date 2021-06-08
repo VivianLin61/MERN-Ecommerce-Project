@@ -1,5 +1,5 @@
 import React from 'react'
-import { BiRupee } from 'react-icons/bi'
+import { BiDollar } from 'react-icons/bi'
 
 /**
  * @author
@@ -15,7 +15,7 @@ const Price = (props) => {
         margin: '5px 0',
       }}
     >
-      <BiRupee />
+      <BiDollar />
       {props.value}
     </div>
   )

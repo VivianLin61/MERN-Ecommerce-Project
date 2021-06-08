@@ -59,7 +59,7 @@ const CartPage = (props) => {
         <div className='cartContainer' style={{ alignItems: 'flex-start' }}>
           <Card
             headerLeft={`My Cart`}
-            headerRight={<div>Deliver to</div>}
+
             // style={{ width: 'calc(100% - 400px)', overflow: 'hidden' }}
           >
             <div>
@@ -79,9 +79,10 @@ const CartPage = (props) => {
                 <div></div>
               )}
 
-              <div style={{ width: '250px' }}>
+              <div className='placeOrder'>
                 <MaterialButton
                   title='PLACE ORDER'
+                  style={{ width: '250px', float: 'right' }}
                   onClick={() => props.history.push(`/checkout`)}
                 />
               </div>

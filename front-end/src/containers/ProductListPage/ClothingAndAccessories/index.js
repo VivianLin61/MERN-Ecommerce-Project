@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getProductsBySlug } from '../../../actions'
 import Card from '../../../components/UI/Card'
-import { BiRupee } from 'react-icons/bi'
+import { BiDollar } from 'react-icons/bi'
 import { Link } from 'react-router-dom'
 import { generatePublicUrl } from '../../../urlConfig'
 import './style.css'
@@ -15,14 +15,16 @@ import './style.css'
 const ClothingAndAccessories = (props) => {
   const product = useSelector((state) => state.product)
   const dispatch = useDispatch()
-
+  const { match } = props
+  const pageTitle =
+    match.params.slug.charAt(0).toUpperCase() + match.params.slug.slice(1)
   useEffect(() => {
-    const { match } = props
     dispatch(getProductsBySlug(match.params.slug))
   }, [])
 
   return (
     <div style={{ padding: '10px' }}>
+      <div className='categoryTitle'>{pageTitle}</div>
       <Card
         style={{
           boxSizing: 'border-box',
@@ -41,7 +43,7 @@ const ClothingAndAccessories = (props) => {
             <div>
               <div className='caProductName'>{product.name}</div>
               <div className='caProductPrice'>
-                <BiRupee />
+                <BiDollar />
                 {product.price}
               </div>
             </div>

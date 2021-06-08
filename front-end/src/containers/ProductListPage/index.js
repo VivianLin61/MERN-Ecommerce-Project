@@ -3,7 +3,7 @@ import Layout from '../../components/Layout'
 import getParams from '../../utils/getParams'
 import ClothingAndAccessories from './ClothingAndAccessories/index.js'
 // import ClothingAndAccessories from './ClothingAndAccessories'
-import ProductPage from './ProductPage'
+import CategoryPage from './CategoryPage'
 import ProductStore from './ProductStore'
 import './style.css'
 
@@ -17,7 +17,7 @@ const ProductListPage = (props) => {
         content = <ProductStore {...props} />
         break
       case 'page':
-        content = <ProductPage {...props} />
+        content = <CategoryPage {...props} />
         break
       default:
         content = <ClothingAndAccessories {...props} />

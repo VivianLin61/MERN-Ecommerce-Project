@@ -31,7 +31,7 @@
   height: 440px;
   overflow: hidden;
   text-align: center;
-  border: 1px solid #f0f0f0;
+  /* border: 1px solid #f0f0f0; */
 }
 .productDescImgContainer > img {
   max-width: 100%;
@@ -59,7 +59,7 @@
   margin: 0 10px;
 }
 .productDetails {
-  margin: 0 10px;
+  margin: 0 100px;
 }
 .productDetails .productTitle {
   font-size: 18px;

@@ -48,7 +48,7 @@ const Address = ({
       </div>
       <div className='flexRow sb addressinfo'>
         {!adr.edit ? (
-          <div style={{ width: '100%' }}>
+          <div className='addressInfo' style={{ width: '100%' }}>
             <div className='addressDetail'>
               <div>
                 <span className='addressName'>{adr.name}</span>
@@ -74,8 +74,9 @@ const Address = ({
                 title='DELIVERY HERE'
                 onClick={() => confirmDeliveryAddress(adr)}
                 style={{
-                  width: '200px',
+                  overflow: 'hidden',
                   margin: '10px 0',
+                  clear: 'both',
                 }}
               />
             )}
@@ -271,9 +272,10 @@ const CheckoutPage = (props) => {
                 style={{
                   padding: '20px',
                   alignItems: 'center',
+                  justifyContent: 'space-between',
                 }}
               >
-                <p style={{ fontSize: '12px' }}>
+                <p style={{ fontSize: '14px' }}>
                   Order confirmation email will be sent to{' '}
                   <strong>{auth.user.email}</strong>
                 </p>
@@ -300,19 +302,29 @@ const CheckoutPage = (props) => {
                     style={{
                       alignItems: 'center',
                       padding: '20px',
+                      justifyContent: 'space-between',
                     }}
                   >
-                    <input type='radio' name='paymentOption' value='cod' />
-                    <div>Cash on delivery</div>
+                    <div
+                      className='flexRow'
+                      style={{
+                        alignItems: 'center',
+                        padding: '20px',
+                      }}
+                    >
+                      <input type='radio' name='paymentOption' value='cod' />
+                      <div>Cash on delivery</div>
+                    </div>
+
+                    <MaterialButton
+                      title='CONFIRM ORDER'
+                      onClick={onConfirmOrder}
+                      style={{
+                        width: '200px',
+                        margin: '0 0 20px 20px',
+                      }}
+                    />
                   </div>
-                  <MaterialButton
-                    title='CONFIRM ORDER'
-                    onClick={onConfirmOrder}
-                    style={{
-                      width: '200px',
-                      margin: '0 0 20px 20px',
-                    }}
-                  />
                 </div>
               )
             }

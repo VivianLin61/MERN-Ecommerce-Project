@@ -7,7 +7,9 @@ exports.addCategory = (req, res) => {
     slug: slugify(req.body.name.toString(), { replacement: '-', lower: true }),
     createdBy: req.user._id,
   }
-
+  if (req.body.type) {
+    categoryObj.type = req.body.type
+  }
   if (req.file) {
     categoryObj.categoryImage = process.env.API + '/public/' + req.file.filename
   }
@@ -41,6 +43,7 @@ function createCategories(categories, parentId = null) {
       slug: cate.slug,
       parentId: cate.parentId,
       type: cate.type,
+      categoryImage: cate.categoryImage,
       children: createCategories(categories, cate._id),
     })
   }
@@ -61,13 +64,23 @@ exports.getCategories = (req, res) => {
 }
 
 exports.updateCategories = async (req, res) => {
-  const { _id, name, parentId, type } = req.body
+  const { _id, name, parentId, type, images } = req.body
+
+  let categoryImages = req.files
+  console.log(req.body)
   const updatedCategories = []
   if (name instanceof Array) {
     for (let i = 0; i < name.length; i++) {
       const category = {
         name: name[i],
         type: type[i],
+      }
+
+      if (images[i]) {
+        let file = categoryImages.shift()
+        if (file) {
+          category.categoryImage = process.env.API + '/public/' + file.filename
+        }
       }
       if (parentId[i] !== '') {
         category.parentId = parentId[i]

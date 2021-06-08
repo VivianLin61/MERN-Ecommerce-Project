@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import './style.css'
 import { useSelector, useDispatch } from 'react-redux'
 import { getAllCategory } from '../../actions'
-
+import { Link } from 'react-router-dom'
 /**
  * @author
  * @function MenuHeader
@@ -28,7 +28,16 @@ const MenuHeader = (props) => {
               {category.name}
             </a>
           ) : (
-            <span>{category.name}</span>
+            <>
+              {' '}
+              <Link
+                to={`/${category.slug}?cid=${category._id}&type=${category.type}`}
+                className='categoryLink'
+              >
+                {category.name}
+              </Link>
+              {/* <span>{category.name}</span> */}
+            </>
           )}
           {category.children.length > 0 ? (
             <ul>{renderCategories(category.children)}</ul>

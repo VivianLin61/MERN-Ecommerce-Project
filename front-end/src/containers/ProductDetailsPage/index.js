@@ -74,61 +74,19 @@ const ProductDetailsPage = (props) => {
                   props.history.push(`/cart`)
                 }}
               />
-              <MaterialButton
-                title='BUY NOW'
-                bgColor='#fb641b'
-                textColor='#ffffff'
-                style={{
-                  marginLeft: '5px',
-                }}
-                icon={<AiFillThunderbolt />}
-              />
             </div>
           </div>
         </div>
         <div>
-          {/* home > category > subCategory > productName */}
-          <div className='breed'>
-            <ul>
-              <li>
-                <a href='#'>Home</a>
-                <IoIosArrowForward />
-              </li>
-              <li>
-                <a href='#'>Mobiles</a>
-                <IoIosArrowForward />
-              </li>
-              <li>
-                <a href='#'>Samsung</a>
-                <IoIosArrowForward />
-              </li>
-              <li>
-                <a href='#'>{product.productDetails.name}</a>
-              </li>
-            </ul>
-          </div>
+          {/*breed*/}
           {/* product description */}
           <div className='productDetails'>
             <p className='productTitle'>{product.productDetails.name}</p>
-            <div>
-              <span className='ratingCount'>
-                4.3 <IoIosStar />
-              </span>
-              <span className='ratingNumbersReviews'>
-                72,234 Ratings & 8,140 Reviews
-              </span>
-            </div>
-            <div className='extraOffer'>
-              Extra <BiDollar />
-              4500 off{' '}
-            </div>
+
             <div className='flexRow priceContainer'>
               <span className='price'>
                 <BiDollar />
                 {product.productDetails.price}
-              </span>
-              <span className='discount' style={{ margin: '0 10px' }}>
-                22% off
               </span>
               {/* <span>i</span> */}
             </div>
@@ -140,20 +98,9 @@ const ProductDetailsPage = (props) => {
                   fontWeight: '600',
                 }}
               >
-                Available Offers
+                Description
               </p>
               <p style={{ display: 'flex' }}>
-                <span
-                  style={{
-                    width: '100px',
-                    fontSize: '12px',
-                    color: '#878787',
-                    fontWeight: '600',
-                    marginRight: '20px',
-                  }}
-                >
-                  Description
-                </span>
                 <span
                   style={{
                     fontSize: '12px',

@@ -63,17 +63,19 @@
 
 /* Material Button */
 .materialButton {
-  width: 100%;
+  width: 200px;
   display: inline-block;
   padding: 15px;
   font-size: 15px;
   outline: none;
-  background-color: #fb641b;
-  color: #ffffff;
+  background-color: #ffd812;
+  font-weight: bold;
+  color: black;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
   border: none;
   cursor: pointer;
-  border-radius: 2px;
+  border-radius: 10px;
+  float: right;
 }
 .materialButton:hover {
   box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.12);

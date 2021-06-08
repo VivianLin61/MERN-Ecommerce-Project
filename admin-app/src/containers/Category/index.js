@@ -36,12 +36,12 @@ const Category = (props) => {
   const [parentCategoryId, setParentCategoryId] = useState('')
   const [categoryImage, setCategoryImage] = useState('')
   const [checked, setChecked] = useState([])
-  const [expanded, setExpanded] = useState([])
   const [checkedArray, setCheckedArray] = useState([])
-  const [expandedArray, setExpandedArray] = useState([])
   const [updateCategoryModal, setUpdateCategoryModal] = useState(false)
   const [deleteCategoryModal, setDeleteCategoryModal] = useState(false)
-  const handleClose = () => {
+  const [expanded, setExpanded] = useState([])
+  const [expandedArray, setExpandedArray] = useState([])
+  const addCategoryForm = () => {
     const form = new FormData()
     form.append('name', categoryName)
     form.append('parentId', parentCategoryId)
@@ -82,6 +82,8 @@ const Category = (props) => {
         value: category._id,
         name: category.name,
         parentId: category.parentId,
+        type: category.type,
+        categoryImage: category.categoryImage,
       })
       if (category.children.length > 0) {
         createCategoryList(category.children, options)
@@ -100,6 +102,7 @@ const Category = (props) => {
     const categories = createCategoryList(category.categories)
     const checkedArray = []
     const expandedArray = []
+
     checked.length > 0 &&
       checked.forEach((categoryId, index) => {
         const category = categories.find(
@@ -135,19 +138,32 @@ const Category = (props) => {
 
   const updateCategoriesForm = () => {
     const form = new FormData()
-
     expandedArray.forEach((item, index) => {
       form.append('_id', item.value)
       form.append('name', item.name)
       form.append('parentId', item.parentId ? item.parentId : '')
       form.append('type', item.type)
+      if (item.categoryImage) {
+        form.append('categoryImage', item.categoryImage)
+        form.append('images', true)
+      } else {
+        form.append('images', false)
+      }
     })
     checkedArray.forEach((item, index) => {
       form.append('_id', item.value)
       form.append('name', item.name)
       form.append('parentId', item.parentId ? item.parentId : '')
       form.append('type', item.type)
+      if (item.categoryImage) {
+        form.append('categoryImage', item.categoryImage)
+        form.append('images', true)
+      } else {
+        form.append('images', false)
+      }
     })
+
+    console.log(form)
     dispatch(updateCategories(form)).then((result) => {
       if (result) {
         dispatch(getAllCategory())
@@ -265,7 +281,7 @@ const Category = (props) => {
         <AddCategoryModal
           show={show}
           handleClose={() => setShow(false)}
-          onSubmit={handleClose}
+          onSubmit={addCategoryForm}
           modalTitle={'Add New Category'}
           categoryName={categoryName}
           setCategoryName={setCategoryName}
@@ -284,6 +300,7 @@ const Category = (props) => {
           checkedArray={checkedArray}
           handleCategoryInput={handleCategoryInput}
           categoryList={categoryList}
+          handleCategoryImage={handleCategoryImage}
         />
         {renderDeleteCategoryModal()}
       </Layout>

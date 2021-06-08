@@ -101,6 +101,13 @@ const Products = (props) => {
     }
 
     dispatch(addProduct(form)).then(() => setShow(false))
+
+    setName('')
+    setQuantity('')
+    setPrice('')
+    setDescription('')
+    setCategoryId('')
+    setProductPictures([])
   }
   const handleClose = () => {
     setShow(false)
