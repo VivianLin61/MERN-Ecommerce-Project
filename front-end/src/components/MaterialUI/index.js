@@ -80,6 +80,7 @@ const MaterialButton = (props) => {
   const onClick = () => {
     props.onClick && props.onClick()
   }
+
   return (
     <div
       style={{
@@ -93,6 +94,7 @@ const MaterialButton = (props) => {
           backgroundColor: props.bgColor,
           color: props.textColor,
           fontSize: props.fontSize,
+          float: props.float,
         }}
         onClick={onClick}
       >

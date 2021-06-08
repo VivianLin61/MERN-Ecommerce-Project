@@ -11,7 +11,7 @@ import Card from '../../components/UI/Card'
 import CartPage from '../CartPage'
 import AddressForm from './AddressForm'
 import './style.css'
-
+import { Link } from 'react-router-dom'
 /**
  * @author
  * @function CheckoutPage
@@ -105,8 +105,11 @@ const CheckoutPage = (props) => {
   const [selectedAddress, setSelectedAddress] = useState(false)
   const [orderSummary, setOrderSummary] = useState(false)
   const [orderConfirmation, setOrderConfirmation] = useState(false)
+  const [orderedItems, setOrderedItems] = useState({})
   const [paymentOption, setPaymentOption] = useState(false)
   const [confirmOrder, setConfirmOrder] = useState(false)
+  const [order, setOrder] = useState({})
+  const [totalCost, setTotalCost] = useState(0)
   useEffect(() => {
     auth.authenticate && dispatch(getAddress())
     auth.authenticate && dispatch(getCartItems())
@@ -164,11 +167,20 @@ const CheckoutPage = (props) => {
       },
       0
     )
+
+    setTotalCost(totalAmount)
     const items = Object.keys(cart.cartItems).map((key) => ({
       productId: key,
       payablePrice: cart.cartItems[key].price,
       purchasedQty: cart.cartItems[key].qty,
     }))
+    const orderedItems = Object.keys(cart.cartItems).map((key) => ({
+      productId: key,
+      payablePrice: cart.cartItems[key].price,
+      purchasedQty: cart.cartItems[key].qty,
+      productName: cart.cartItems[key].name,
+    }))
+    setOrderedItems(orderedItems)
     const payload = {
       addressId: selectedAddress._id,
       totalAmount,
@@ -176,7 +188,7 @@ const CheckoutPage = (props) => {
       paymentStatus: 'pending',
       paymentType: 'cod',
     }
-
+    setOrder(payload)
     console.log(payload)
     dispatch(addOrder(payload))
 
@@ -187,7 +199,36 @@ const CheckoutPage = (props) => {
     return (
       <Layout>
         <Card>
-          <div>thankyou</div>
+          <div className='thankYouTitle'>Thank You for your order</div>
+          <div className='orderNumber'>Order Details </div>
+          <div className='deliveryAddress'>
+            Delivery Address:
+            <span
+              style={{ fontWeight: '100' }}
+            >{`${selectedAddress.name} ${selectedAddress.address} - ${selectedAddress.zipCode}`}</span>
+          </div>
+          <div className='itemsList'>
+            <div>
+              <div style={{ fontWeight: 'bold' }}>Product</div>
+              <div style={{ fontWeight: 'bold' }}>Cost</div>
+            </div>
+            {orderedItems &&
+              orderedItems.map((item, index) => (
+                <div>
+                  <div>
+                    {item.productName} X {item.purchasedQty}
+                  </div>
+                  <div>{item.payablePrice}</div>
+                </div>
+              ))}
+            <div>
+              <div style={{ fontWeight: 'bold' }}>Total:</div>
+              <div style={{ fontWeight: 'bold' }}>{totalCost}</div>
+            </div>
+            <Link className='orderStatusLink' to={'/account/orders'}>
+              View Order Status
+            </Link>
+          </div>
         </Card>
       </Layout>
     )
@@ -221,7 +262,7 @@ const CheckoutPage = (props) => {
             body={
               <>
                 {confirmAddress ? (
-                  <div className='stepCompleted'>{`${selectedAddress.name} ${selectedAddress.address} - ${selectedAddress.pinCode}`}</div>
+                  <div className='stepCompleted'>{`${selectedAddress.name} ${selectedAddress.address} - ${selectedAddress.zipCode}`}</div>
                 ) : address ? (
                   address.map((adr) => (
                     <Address

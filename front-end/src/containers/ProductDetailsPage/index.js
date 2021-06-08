@@ -56,25 +56,6 @@ const ProductDetailsPage = (props) => {
                 )}`}
               />
             </div>
-
-            {/* action buttons */}
-            <div className='flexRow'>
-              <MaterialButton
-                title='ADD TO CART'
-                bgColor='#ff9f00'
-                textColor='#ffffff'
-                style={{
-                  marginRight: '5px',
-                }}
-                icon={<IoMdCart />}
-                onClick={() => {
-                  const { _id, name, price } = product.productDetails
-                  const img = product.productDetails.productPictures[0].img
-                  dispatch(addToCart({ _id, name, price, img }))
-                  props.history.push(`/cart`)
-                }}
-              />
-            </div>
           </div>
         </div>
         <div>
@@ -110,6 +91,25 @@ const ProductDetailsPage = (props) => {
                   {product.productDetails.description}
                 </span>
               </p>
+            </div>
+            {/* action buttons */}
+            <div className='flexRow'>
+              <MaterialButton
+                title='ADD TO CART'
+                bgColor='#ff9f00'
+                textColor='#ffffff'
+                float='left'
+                style={{
+                  marginRight: '5px',
+                }}
+                icon={<IoMdCart />}
+                onClick={() => {
+                  const { _id, name, price } = product.productDetails
+                  const img = product.productDetails.productPictures[0].img
+                  dispatch(addToCart({ _id, name, price, img }))
+                  props.history.push(`/cart`)
+                }}
+              />
             </div>
           </div>
         </div>
