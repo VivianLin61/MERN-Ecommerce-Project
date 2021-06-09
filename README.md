@@ -18,4 +18,8 @@ An fullstack MERN Ecommernce Web Application
 
 #Installation
 1. Clone the project
-2. 
+```
+$ git clone 
+$ cd back-end
+$ npm install
+````
