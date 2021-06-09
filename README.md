@@ -38,10 +38,11 @@ cd front-end
 npm install
 ```
 * Create an ```.env``` file than includes ```PORT```
+   * Run front-end application
 ```
 npm start
 ```
-  * Run front-end application
+
 4. Set up admin application
 ``` 
 cd ..
