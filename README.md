@@ -13,10 +13,10 @@ An fullstack MERN Ecommernce Web Application
 * React is used to show the UI compoenets and Redux is used to mange the state of the application. 
 * Node is used to for the backend environment.
 
-##Project Demo
+## Project Demo
 ![LWh3mnXbvc](https://user-images.githubusercontent.com/33815743/121367850-a203a000-c908-11eb-8b1e-6df346b9f9df.gif)
 
-#Installation
+# Installation
 1. Clone the project
 ```
 $ git clone 
