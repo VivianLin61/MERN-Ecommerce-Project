@@ -19,7 +19,39 @@ An fullstack MERN Ecommernce Web Application
 # Installation
 1. Clone the project
 ```
-$ git clone 
-$ cd back-end
-$ npm install
-````
+$ git clone https://github.com/VivianLin61/MERN-Ecommerce-Project.git
+```
+2. Set up back end
+``` 
+cd back-end
+npm install
+```
+* Create an ```.env``` file than includes ```MONGO_URI, JWT_SECRET && PORT```
+* Run back-end application
+``` 
+npm start
+```
+3. Set up front-end
+``` 
+cd ..
+cd front-end
+npm install
+```
+* Create an ```.env``` file than includes ```PORT```
+```
+npm start
+```
+  * Run front-end application
+4. Set up admin application
+``` 
+cd ..
+cd admin-app
+npm install
+```
+* Create an ```.env``` file than includes ```PORT```
+* Run admin application
+```
+npm start
+```
+
+  
