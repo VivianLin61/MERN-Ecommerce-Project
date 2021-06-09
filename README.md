@@ -10,8 +10,8 @@ An fullstack MERN Ecommernce Web Application
 ## Tools used
 * <b>Mongoose</b> is used to create database schemas.
 * Requests and routes are handled via <b>Express<b/> middleware.
-* React is used to show the UI compoenets and Redux is used to mange the state of the application. 
-* Node is used to for the backend environment.
+* <b>React</b>  is used to show the UI compoenets and <b>Redux</b>  is used to mange the state of the application. 
+* <b>Node</b>  is used to for the backend environment.
 
 ## Project Demo
 ![LWh3mnXbvc](https://user-images.githubusercontent.com/33815743/121367850-a203a000-c908-11eb-8b1e-6df346b9f9df.gif)
