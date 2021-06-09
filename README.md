@@ -5,7 +5,7 @@ An fullstack MERN Ecommernce Web Application
 
 ## Features
 1. Users can browse the store products and make a purchase.
-2. Admin users can manage and the products and compoents on the store.
+2. Admin users can manage and the products and components on the store.
 
 ## Tools used
 * <b>Mongoose</b> is used to create database schemas.
