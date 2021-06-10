@@ -101,7 +101,7 @@ const CartPage = (props) => {
               cart.cartItems
                 ? Object.keys(cart.cartItems).reduce((totalPrice, key) => {
                     const { price, qty } = cart.cartItems[key]
-                    return totalPrice + price * qty
+                    return Math.round((totalPrice + price * qty) * 100) / 100
                   }, 0)
                 : 0
             }

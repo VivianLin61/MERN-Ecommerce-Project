@@ -10,6 +10,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux'
 import { login, signout, signup as _signup } from '../../actions'
 import Cart from '../UI/Cart'
+import { useHistory } from 'react-router-dom'
 
 /**
  * @author
@@ -26,6 +27,7 @@ const Header = (props) => {
   const [error, setError] = useState('')
   const auth = useSelector((state) => state.auth)
   const dispatch = useDispatch()
+  let history = useHistory()
 
   // state cart value
   const cart = useSelector((state) => state.cart)
@@ -53,6 +55,7 @@ const Header = (props) => {
   }
 
   const logout = () => {
+    history.push('/')
     dispatch(signout())
   }
 
@@ -209,7 +212,6 @@ const Header = (props) => {
             padding: '0 10px',
           }}
         >
-          
           <div className='searchInputContainer'>
             <input
               className='searchInput'

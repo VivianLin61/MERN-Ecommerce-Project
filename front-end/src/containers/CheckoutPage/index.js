@@ -10,6 +10,7 @@ import {
 import Card from '../../components/UI/Card'
 import CartPage from '../CartPage'
 import AddressForm from './AddressForm'
+import PriceDetails from '../../components/PriceDetails'
 import './style.css'
 import { Link } from 'react-router-dom'
 /**
@@ -67,7 +68,7 @@ const Address = ({
               )}
             </div>
             <div className='fullAddress'>
-              {adr.address} <br /> {`${adr.state} - ${adr.pinCode}`}
+              {adr.address} <br /> {`${adr.state} - ${adr.zipCode}`}
             </div>
             {adr.selected && (
               <MaterialButton
@@ -163,7 +164,7 @@ const CheckoutPage = (props) => {
     const totalAmount = Object.keys(cart.cartItems).reduce(
       (totalPrice, key) => {
         const { price, qty } = cart.cartItems[key]
-        return totalPrice + price * qty
+        return Math.round((totalPrice + price * qty) * 100) / 100
       },
       0
     )
@@ -262,14 +263,18 @@ const CheckoutPage = (props) => {
             body={
               <>
                 {confirmAddress ? (
-                  <div className='stepCompleted'>{`${selectedAddress.name} ${selectedAddress.address} - ${selectedAddress.zipCode}`}</div>
+                  <div>
+                    <div className='stepCompleted'>{`${selectedAddress.name} ${selectedAddress.address} - ${selectedAddress.zipCode}`}</div>
+                  </div>
                 ) : address ? (
-                  address.map((adr) => (
+                  address.map((adr, index) => (
                     <Address
+                      key={index}
                       selectAddress={selectAddress}
                       enableAddressEditForm={enableAddressEditForm}
                       confirmDeliveryAddress={confirmDeliveryAddress}
                       onAddressSubmit={onAddressSubmit}
+                      setAddress={setAddress}
                       adr={adr}
                     />
                   ))
@@ -351,9 +356,16 @@ const CheckoutPage = (props) => {
                       style={{
                         alignItems: 'center',
                         padding: '20px',
+                        fontSize: '20px',
+                        margin: '0 0 20px',
                       }}
                     >
-                      <input type='radio' name='paymentOption' value='cod' />
+                      <input
+                        style={{}}
+                        type='radio'
+                        name='paymentOption'
+                        value='cod'
+                      />
                       <div>Cash on delivery</div>
                     </div>
 
@@ -371,6 +383,23 @@ const CheckoutPage = (props) => {
             }
           />
         </div>
+        <PriceDetails
+          totalItem={
+            cart.cartItems
+              ? Object.keys(cart.cartItems).reduce(function (qty, key) {
+                  return qty + cart.cartItems[key].qty
+                }, 0)
+              : 0
+          }
+          totalPrice={
+            cart.cartItems
+              ? Object.keys(cart.cartItems).reduce((totalPrice, key) => {
+                  const { price, qty } = cart.cartItems[key]
+                  return Math.round((totalPrice + price * qty) * 100) / 100
+                }, 0)
+              : 0
+          }
+        />
 
         {/* Price Component */}
       </div>

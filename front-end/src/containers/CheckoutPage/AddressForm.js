@@ -10,14 +10,13 @@ import { MaterialButton, MaterialInput } from '../../components/MaterialUI'
 
 const AddressForm = (props) => {
   const { initialData } = props
+  console.log(props)
   const [name, setName] = useState(initialData ? initialData.name : '')
   const [mobileNumber, setMobileNumber] = useState(
     initialData ? initialData.mobileNumber : ''
   )
-  const [zipCode, setZipCode] = useState(initialData ? initialData.pinCode : '')
-  const [country, setCountry] = useState(
-    initialData ? initialData.locality : ''
-  )
+  const [zipCode, setZipCode] = useState(initialData ? initialData.zipCode : '')
+  const [country, setCountry] = useState(initialData ? initialData.country : '')
   const [address, setAddress] = useState(initialData ? initialData.address : '')
   const [cityDistrictTown, setCityDistrictTown] = useState(
     initialData ? initialData.cityDistrictTown : ''
@@ -37,7 +36,7 @@ const AddressForm = (props) => {
     marginRight: 10,
   }
 
-  const onAddressSubmit = (e) => {
+  const submitAddress = (e) => {
     const payload = {
       address: {
         name,
@@ -54,6 +53,8 @@ const AddressForm = (props) => {
     if (id) {
       payload.address._id = id
     }
+
+    props.onSubmitForm(payload.address)
     dispatch(addAddress(payload))
     setSubmitFlag(true)
   }
@@ -119,10 +120,10 @@ const AddressForm = (props) => {
             />
           </div>
         </div>
-        <div>
-          <label>Address Type</label>
-          <div className='flexRow'>
-            <div>
+        <div style={{ marginTop: '15px' }}>
+          <label style={{ fontWeight: 'bold' }}>Address Type</label>
+          <div style={{ marginTop: '5px' }} className='flexRow'>
+            <div style={{ marginRight: '10px' }}>
               <input
                 type='radio'
                 onClick={() => setAddressType('home')}
@@ -142,12 +143,12 @@ const AddressForm = (props) => {
             </div>
           </div>
         </div>
-        <div className='flexRow'>
+        <div className=''>
           <MaterialButton
             title='SAVE AND DELIVER HERE'
-            onClick={onAddressSubmit}
+            onClick={submitAddress}
+            float='left'
             style={{
-              width: '250px',
               margin: '20px 0',
             }}
           />

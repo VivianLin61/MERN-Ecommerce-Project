@@ -43,6 +43,8 @@ const CartItem = (props) => {
         style={{
           display: 'flex',
           margin: '5px 0',
+          paddingBottom: '10px',
+          paddingLeft: '10px',
         }}
       >
         {/* quantity control */}

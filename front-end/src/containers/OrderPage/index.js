@@ -24,6 +24,14 @@ const OrderPage = (props) => {
     dispatch(getOrders())
   }, [])
 
+  const formatDate = (date) => {
+    if (date) {
+      const d = new Date(date)
+      return `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`
+    }
+    return ''
+  }
+
   return (
     <Layout>
       <div style={{ maxWidth: '1160px', margin: '5px auto' }}>
@@ -54,9 +62,26 @@ const OrderPage = (props) => {
                 <div className='orderRow'>
                   <div className='orderName'>{item.productId.name}</div>
                   <div className='orderPrice'>
-                    <BiDollar />
-                    {item.payablePrice}
+                    Price:
+                    <span style={{ fontWeight: '300' }}>
+                      <BiDollar />
+                      {item.payablePrice}
+                    </span>
                   </div>
+                  <div className='orderQuantity'>
+                    Quantity:{' '}
+                    <span style={{ fontWeight: '300' }}>
+                      {item.purchasedQty}
+                    </span>
+                  </div>
+                  <div className='orderDate'>
+                    Date Ordered:{' '}
+                    <span style={{ fontWeight: '300' }}>
+                      {' '}
+                      {formatDate(order.createdAt)}
+                    </span>
+                  </div>
+
                   {/* <div>{order.paymentStatus}</div> */}
                 </div>
               </Link>

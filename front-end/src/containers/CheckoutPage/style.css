@@ -47,7 +47,6 @@
 .addressContainer {
   box-sizing: border-box;
   padding: 20px;
-  background: #f5faff;
 }
 .addressinfo {
   padding-left: 15px;
@@ -77,8 +76,8 @@
   color: #777777;
 }
 .fullAddress {
-  font-size: 12px;
-  letter-spacing: 1px;
+  font-size: 16px;
+  letter-spacing: 0px;
   line-height: 18px;
 }
 .stepCompleted {

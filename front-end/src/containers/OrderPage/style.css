@@ -35,10 +35,23 @@
   align-items: flex-start;
   font-size: 18px;
   margin: 20px 20px;
+  font-weight: bold;
 }
 
 .orderTitle {
   font-size: 30px;
   font-weight: bold;
   margin: 20px 20px;
+}
+
+.orderQuantity {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 20px 20px;
+}
+
+.orderDate {
+  font-size: 18px;
+  margin: 20px 20px;
+  font-weight: bold;
 }
