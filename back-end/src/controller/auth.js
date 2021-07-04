@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt')
 const shortid = require('shortid')
 
 const generateJwtToken = (_id, role) => {
+  console.log(process.env.JWT_SECRET)
   return jwt.sign({ _id, role }, process.env.JWT_SECRET, {
     expiresIn: '1d',
   })

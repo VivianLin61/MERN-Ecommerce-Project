@@ -4,12 +4,8 @@ const slugify = require('slugify')
 const Category = require('../models/category')
 
 exports.createProduct = (req, res) => {
-  //res.status(200).json( { file: req.files, body: req.body } );
-
   const { name, price, description, category, quantity, createdBy } = req.body
   let productPictures = []
-
-  console.log(req.files)
 
   if (req.files.length > 0) {
     productPictures = req.files.map((file) => {

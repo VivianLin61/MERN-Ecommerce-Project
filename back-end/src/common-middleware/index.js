@@ -4,6 +4,8 @@ const multer = require('multer')
 const path = require('path')
 const multerS3 = require('multer-s3')
 const aws = require('aws-sdk')
+const env = require('dotenv')
+env.config()
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, path.join(path.dirname(__dirname), 'uploads'))
@@ -12,10 +14,9 @@ const storage = multer.diskStorage({
     cb(null, shortid.generate() + '-' + file.originalname)
   },
 })
-
 const s3 = new aws.S3({
-  accessKeyId: 'AKIATUUOPMUWHPY5DDDY',
-  secretAccessKey: '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',
+  accessKeyId: `${process.env.ACCESSS_KEY}`,
+  secretAccessKey: `${process.env.SECERET_ACCESSS_KEY}`,
 })
 exports.upload = multer({ storage: storage })
 
