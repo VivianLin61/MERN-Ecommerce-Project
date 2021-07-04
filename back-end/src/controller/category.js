@@ -11,7 +11,7 @@ exports.addCategory = (req, res) => {
     categoryObj.type = req.body.type
   }
   if (req.file) {
-    categoryObj.categoryImage = process.env.API + '/public/' + req.file.filename
+    categoryObj.categoryImage = '/public/' + req.file.filename
   }
 
   if (req.body.parentId) {
@@ -79,7 +79,7 @@ exports.updateCategories = async (req, res) => {
       if (images[i]) {
         let file = categoryImages.shift()
         if (file) {
-          category.categoryImage = process.env.API + '/public/' + file.filename
+          category.categoryImage = '/public/' + file.filename
         }
       }
       if (parentId[i] !== '') {
