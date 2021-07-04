@@ -190,7 +190,6 @@ const CheckoutPage = (props) => {
       paymentType: 'cod',
     }
     setOrder(payload)
-    console.log(payload)
     dispatch(addOrder(payload))
 
     setConfirmOrder(true)

@@ -33,7 +33,6 @@ export const addAddress = (payload) => {
       const res = await axios.post(`/user/address/create`, { payload })
       dispatch({ type: userConstants.ADD_USER_ADDRESS_REQUEST })
       if (res.status === 201) {
-        console.log(res)
         const {
           address: { address },
         } = res.data
@@ -59,7 +58,6 @@ export const addOrder = (payload) => {
       const res = await axios.post(`/addOrder`, payload)
       dispatch({ type: userConstants.ADD_USER_ORDER_REQUEST })
       if (res.status === 201) {
-        console.log(res)
         const { order } = res.data
         dispatch({
           type: cartConstants.RESET_CART,
@@ -87,7 +85,6 @@ export const getOrders = () => {
       const res = await axios.get(`/getOrders`)
       dispatch({ type: userConstants.GET_USER_ORDER_REQUEST })
       if (res.status === 200) {
-        console.log(res)
         const { orders } = res.data
         dispatch({
           type: userConstants.GET_USER_ORDER_SUCCESS,
@@ -113,7 +110,6 @@ export const getOrder = (payload) => {
       const res = await axios.post(`/getOrder`, payload)
       dispatch({ type: userConstants.GET_USER_ORDER_DETAILS_REQUEST })
       if (res.status === 200) {
-        console.log(res)
         const { order } = res.data
         dispatch({
           type: userConstants.GET_USER_ORDER_DETAILS_SUCCESS,

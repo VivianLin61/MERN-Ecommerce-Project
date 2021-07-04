@@ -17,7 +17,6 @@ const OrderDetailsPage = (props) => {
   const orderDetails = useSelector((state) => state.user.orderDetails)
 
   useEffect(() => {
-    console.log({ props })
     const payload = {
       orderId: props.match.params.orderId,
     }

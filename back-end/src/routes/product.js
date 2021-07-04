@@ -1,7 +1,11 @@
 const express = require('express')
 const router = express.Router()
 const multer = require('multer')
-const { requireSignin, adminMiddleware } = require('../common-middleware/index')
+const {
+  requireSignin,
+  adminMiddleware,
+  uploadS3,
+} = require('../common-middleware/index')
 const {
   createProduct,
   getProductsBySlug,
@@ -25,7 +29,7 @@ router.post(
   '/product/create',
   requireSignin,
   adminMiddleware,
-  upload.array('productPicture'),
+  uploadS3.array('productPicture'),
   createProduct
 )
 router.get('/products/:slug', getProductsBySlug)

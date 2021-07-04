@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from 'react-redux'
 const HomePage = (props) => {
   const categories = useSelector((state) => state.category)
   const categoriesList = categories.categories
-  console.log(categoriesList)
   return (
     <div>
       <Layout>

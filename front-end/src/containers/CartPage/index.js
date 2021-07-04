@@ -23,7 +23,6 @@ const CartPage = (props) => {
     }
   }, [auth.authenticate])
   const onQuantityIncrement = (_id, qty) => {
-    //console.log({_id, qty});
     const { name, price, img } = cartItems[_id]
     dispatch(addToCart({ _id, name, price, img }, 1))
   }

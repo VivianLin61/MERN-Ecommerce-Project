@@ -20,7 +20,6 @@ const ProductDetailsPage = (props) => {
 
   useEffect(() => {
     const { productId } = props.match.params
-    console.log(props)
     const payload = {
       params: {
         productId,

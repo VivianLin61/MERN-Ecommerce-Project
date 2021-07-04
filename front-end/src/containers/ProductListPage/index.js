@@ -9,7 +9,6 @@ import './style.css'
 
 const ProductListPage = (props) => {
   const renderProduct = () => {
-    console.log(props)
     const params = getParams(props.location.search)
     let content = null
     switch (params.type) {

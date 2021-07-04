@@ -1,8 +1,9 @@
 const jwt = require('jsonwebtoken')
-
 const shortid = require('shortid')
 const multer = require('multer')
 const path = require('path')
+const multerS3 = require('multer-s3')
+const aws = require('aws-sdk')
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, path.join(path.dirname(__dirname), 'uploads'))
@@ -11,7 +12,26 @@ const storage = multer.diskStorage({
     cb(null, shortid.generate() + '-' + file.originalname)
   },
 })
+
+const s3 = new aws.S3({
+  accessKeyId: 'AKIATUUOPMUWHPY5DDDY',
+  secretAccessKey: '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',
+})
 exports.upload = multer({ storage: storage })
+
+exports.uploadS3 = multer({
+  storage: multerS3({
+    s3: s3,
+    bucket: 'vivian-ecommerce-app',
+    acl: 'public-read',
+    metadata: function (req, file, cb) {
+      cb(null, { fieldName: file.fieldname })
+    },
+    key: function (req, file, cb) {
+      cb(null, shortid.generate() + '-' + file.originalname)
+    },
+  }),
+})
 
 exports.requireSignin = (req, res, next) => {
   if (req.headers.authorization) {
